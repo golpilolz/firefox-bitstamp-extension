@@ -1,0 +1,35 @@
+{
+    "manifest_version": 2,
+    "name": "Bitstamp cryptos values",
+    "version": "1.0",
+
+    "description": "",
+
+    "icons": {
+        "32": "icons/bitstamp-32.png",
+        "48": "icons/bitstamp-48.png"
+    },
+
+    "background": {
+        "scripts": [
+            "app.js"
+        ]
+    },
+
+    "content_scripts": [{
+        "matches": [
+            "*://*/"
+        ]
+    }],
+
+    "permissions": [
+        "*://www.bitstamp.net/*",
+        "storage"
+    ],
+
+    "browser_action": {
+        "browser_style": true,
+        "default_title": "Bitstamp",
+        "default_icon": "icons/etherum-32.png"
+    }
+}
