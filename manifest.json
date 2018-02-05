@@ -30,6 +30,7 @@
     "browser_action": {
         "browser_style": true,
         "default_title": "Bitstamp",
-        "default_icon": "icons/etherum-32.png"
+        "default_icon": "icons/etherum-32.png",
+        "default_popup": "popup/bitstamp.html"
     }
 }
