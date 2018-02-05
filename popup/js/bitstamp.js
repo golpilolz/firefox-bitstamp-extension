@@ -2,6 +2,7 @@
 const REFRESH_TIME = 30;
 
 let lastupdateBox = document.getElementById("lastupdate");
+let lastvalueBox = document.getElementById("lastvalue");
 
 lastupdateBox.innerText = "fds";
 
@@ -15,9 +16,17 @@ function updateDate(timestamp) {
     lastupdateBox.innerText = formattedTime;
 }
 
+function updateValue(value) {
+    lastvalueBox.innerText = value;
+}
+
 function updatePopup() {
     browser.storage.local.get('bt_timestamp').then(function(item){
         updateDate(item.bt_timestamp);
+    });
+
+    browser.storage.local.get('bt_last').then(function(item){
+        updateValue(item.bt_last);
     });
 }
 
