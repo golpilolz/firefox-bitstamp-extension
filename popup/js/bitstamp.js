@@ -1,5 +1,4 @@
-// In second
-const REFRESH_TIME = 30;
+let cryptoselect = document.getElementById("crypto");
 
 let lastupdateBox = document.getElementById("lastupdate");
 let lastvalueBox = document.getElementById("lastvalue");
@@ -31,3 +30,9 @@ function updatePopup() {
 }
 
 updatePopup();
+
+cryptoselect.addEventListener("change", function(){
+    browser.storage.local.set({
+        bt_currency: cryptoselect.value
+    });
+});
