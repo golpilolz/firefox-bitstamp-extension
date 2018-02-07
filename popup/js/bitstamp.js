@@ -5,6 +5,12 @@ let lastvalueBox = document.getElementById("lastvalue");
 
 lastupdateBox.innerText = "fds";
 
+function initPopup() {
+    browser.storage.local.get('bt_currency').then(function (res) {
+        cryptoselect.value = res.bt_currency;
+    });
+}
+
 function updateDate(timestamp) {
     let date = new Date(timestamp*1000);
     let hours = date.getHours();
@@ -29,6 +35,7 @@ function updatePopup() {
     });
 }
 
+initPopup();
 updatePopup();
 
 cryptoselect.addEventListener("change", function(){
