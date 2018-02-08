@@ -2,6 +2,8 @@ let cryptoselect = document.getElementById("crypto");
 
 let lastupdateBox = document.getElementById("lastupdate");
 let lastvalueBox = document.getElementById("lastvalue");
+let refreshspeed = document.getElementById("refreshspeed");
+let refreshvalue = document.getElementById("refreshvalue");
 
 lastupdateBox.innerText = "";
 
@@ -53,3 +55,7 @@ cryptoselect.addEventListener("change", function(){
         bt_currency: cryptoselect.value
     });
 });
+
+refreshspeed.oninput = function() {
+    refreshvalue.innerHTML = this.value;
+};
