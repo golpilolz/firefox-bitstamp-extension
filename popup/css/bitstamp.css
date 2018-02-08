@@ -80,7 +80,7 @@ html, body {
     cursor: pointer; /* Cursor on hover */
 }
 
-#refreshvalue {
+.refresh {
     font-size: 12px;
     width: 100%;
     text-align: center;

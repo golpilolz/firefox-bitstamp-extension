@@ -9,6 +9,14 @@ let refreshTime;
 
 let intervalRefresh;
 
+let cryptos = [];
+cryptos['etheur'] = [];
+cryptos['etheur']['name'] = 'ETH / EUR';
+cryptos['etheur']['icon'] = 'icons/eth-32.png';
+cryptos['xrpeur'] = [];
+cryptos['xrpeur']['name'] = 'XRP / EUR';
+cryptos['xrpeur']['icon'] = 'icons/xrp-32.png';
+
 /**
  * Init all value and start interval
  */
@@ -24,9 +32,6 @@ function init() {
     }));
 
     Promise.all(promises).then(function() {
-        browser.browserAction.setTitle({
-            title: 'Ethereum'
-        });
         browser.browserAction.setBadgeBackgroundColor({color: "grey"});
 
         initDefaultsValues();
@@ -49,11 +54,19 @@ function initDefaultsValues() {
     }
 
     if (typeof refreshTime === 'undefined') {
-        refreshTime = DEFAULT_CURRENCY;
+        refreshTime = DEFAULT_REFRESH_TIME;
         browser.storage.local.set({
             bt_refresh_time: DEFAULT_REFRESH_TIME
         });
     }
+
+    browser.storage.local.set({
+        current_currency_name: cryptos[currentCurrency]['name']
+    });
+
+    browser.browserAction.setIcon({
+        path: cryptos[currentCurrency]['icon']
+    });
 }
 
 /**
@@ -109,7 +122,7 @@ function saveInStorage(obj) {
  */
 function updateTitle(cryptoName, timestamp, value) {
     browser.browserAction.setTitle({
-        title: 'Ethereum à ' + formatDate(timestamp) + " : " + value + " €"
+        title: cryptos[currentCurrency]['name'] + ' at ' + formatDate(timestamp) + " : " + value + " €"
     });
 }
 
@@ -129,14 +142,19 @@ function logStorageChange(changes, area) {
     }
 
     if (typeof changes['bt_currency'] !== 'undefined') {
-        currentCurrency = changes['bt_currency'].newValue + "/";
+        currentCurrency = changes['bt_currency'].newValue;
+        browser.storage.local.set({
+            current_currency_name: cryptos[currentCurrency]['name']
+        });
+        browser.browserAction.setIcon({
+            path: cryptos[currentCurrency]['icon']
+        });
         refresh();
     }
 
     if (typeof changes['bt_refresh_time'] !== 'undefined') {
         clearInterval(intervalRefresh);
         refreshTime = parseInt(changes['bt_refresh_time'].newValue);
-
         intervalRefresh = setInterval(function () {
             refresh();
         }, refreshTime * 1000);

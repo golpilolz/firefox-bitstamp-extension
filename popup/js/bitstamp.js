@@ -5,15 +5,14 @@ let lastvalueBox = document.getElementById("lastvalue");
 let refreshspeed = document.getElementById("refreshspeed");
 let refreshvalue = document.getElementById("refreshvalue");
 
+let currentCurrencyName = document.getElementById("current-currency-name");
+
 lastupdateBox.innerText = "";
 
 function initPopup() {
     browser.storage.local.get('bt_currency').then(function (res) {
-        console.log(res.bt_currency);
-
         cryptoselect.value = res.bt_currency;
     });
-
     browser.storage.onChanged.addListener(updatePopup);
 }
 
@@ -41,6 +40,10 @@ function updatePopup() {
 
     browser.storage.local.get('bt_refresh_time').then(function(item){
         updateRefreshTime(item.bt_refresh_time);
+    });
+
+    browser.storage.local.get('current_currency_name').then(function(item){
+        currentCurrencyName.innerHTML = item.current_currency_name;
     });
 }
 
