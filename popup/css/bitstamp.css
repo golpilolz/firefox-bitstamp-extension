@@ -79,3 +79,10 @@ html, body {
     background: #14A04B; /* Green background */
     cursor: pointer; /* Cursor on hover */
 }
+
+#refreshvalue {
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}

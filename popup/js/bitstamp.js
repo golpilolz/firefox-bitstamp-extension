@@ -13,6 +13,8 @@ function initPopup() {
 
         cryptoselect.value = res.bt_currency;
     });
+
+    browser.storage.onChanged.addListener(updatePopup);
 }
 
 function updateDate(timestamp) {
@@ -23,6 +25,11 @@ function updateValue(value) {
     lastvalueBox.innerText = value;
 }
 
+function updateRefreshTime(time) {
+    refreshspeed.value = time;
+    refreshvalue.innerHTML = time;
+}
+
 function updatePopup() {
     browser.storage.local.get('bt_timestamp').then(function(item){
         updateDate(item.bt_timestamp);
@@ -30,6 +37,10 @@ function updatePopup() {
 
     browser.storage.local.get('bt_last').then(function(item){
         updateValue(item.bt_last);
+    });
+
+    browser.storage.local.get('bt_refresh_time').then(function(item){
+        updateRefreshTime(item.bt_refresh_time);
     });
 }
 
@@ -58,4 +69,7 @@ cryptoselect.addEventListener("change", function(){
 
 refreshspeed.oninput = function() {
     refreshvalue.innerHTML = this.value;
+    browser.storage.local.set({
+        bt_refresh_time: this.value
+    });
 };
