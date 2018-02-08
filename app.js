@@ -1,10 +1,11 @@
 // In second
-const REFRESH_TIME = 30;
+const DEFAULT_REFRESH_TIME = 30;
 const DEFAULT_CURRENCY = 'etheur';
 
 let lastvalue = 0;
 let urlbt = 'https://www.bitstamp.net/api/v2/ticker/';
 let currentCurrency;
+let refreshTime;
 
 let intervalRefresh;
 
@@ -12,33 +13,47 @@ let intervalRefresh;
  * Init all value and start interval
  */
 function init() {
-    browser.browserAction.setTitle({
-        title: 'Ethereum'
-    });
-    browser.browserAction.setBadgeBackgroundColor({color: "grey"});
+    let promises = [];
 
+    promises.push(browser.storage.local.get('bt_currency').then(function (res) {
+        currentCurrency = res.bt_currency;
+    }));
+
+    promises.push(browser.storage.local.get('bt_refresh_time').then(function (res) {
+        refreshTime = res.bt_refresh_time;
+    }));
+
+    Promise.all(promises).then(function() {
+        browser.browserAction.setTitle({
+            title: 'Ethereum'
+        });
+        browser.browserAction.setBadgeBackgroundColor({color: "grey"});
+
+        initDefaultsValues();
+        refresh();
+
+        browser.storage.onChanged.addListener(logStorageChange);
+
+        intervalRefresh = setInterval(function () {
+            refresh();
+        }, refreshTime * 1000);
+    });
+}
+
+function initDefaultsValues() {
     if (typeof currentCurrency === 'undefined') {
         currentCurrency = DEFAULT_CURRENCY;
-
         browser.storage.local.set({
             bt_currency: DEFAULT_CURRENCY
         });
     }
 
-    refresh();
-
-    browser.storage.onChanged.addListener(logStorageChange);
-
-    intervalRefresh = setInterval(function () {
-        refresh();
-    }, REFRESH_TIME * 1000);
-}
-
-function initValues(){
-    browser.storage.local.get('bt_currency').then(function (res) {
-        currentCurrency = res.bt_currency;
-        init();
-    });
+    if (typeof refreshTime === 'undefined') {
+        refreshTime = DEFAULT_CURRENCY;
+        browser.storage.local.set({
+            bt_refresh_time: DEFAULT_REFRESH_TIME
+        });
+    }
 }
 
 /**
@@ -117,6 +132,15 @@ function logStorageChange(changes, area) {
         currentCurrency = changes['bt_currency'].newValue + "/";
         refresh();
     }
+
+    if (typeof changes['bt_refresh_time'] !== 'undefined') {
+        clearInterval(intervalRefresh);
+        refreshTime = parseInt(changes['bt_refresh_time'].newValue);
+
+        intervalRefresh = setInterval(function () {
+            refresh();
+        }, refreshTime * 1000);
+    }
 }
 
 /**
@@ -133,4 +157,4 @@ function formatDate(timestamp) {
     return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 }
 
-initValues();
+init();

@@ -14,13 +14,19 @@
         <label for="crypto"></label>
         <div class="select-style">
             <select id="crypto">
-                <option value="etheur">Etherum Eur</option>
-                <option value="xrpeur">Ripple Eur</option>
+                <option value="etheur">ETH / EUR</option>
+                <option value="xrpeur">XRP / EUR</option>
             </select>
         </div>
 
         <p>Update : <span id="lastupdate"></span></p>
         <p>Etherum : <span id="lastvalue"></span></p>
+
+        <div class="slidecontainer">
+            <label for="refreshspeed"></label>
+            <input id="refreshspeed" class="slider" type="range" min="10" max="60" step="5">
+            <div id="refreshvalue"></div>
+        </div>
     </div>
 
 <script src="js/bitstamp.js"></script>
