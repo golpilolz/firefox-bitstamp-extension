@@ -1,14 +1,43 @@
 html, body {
-    height: 100%;
-    width: 100%;
+    width: 250px;
     margin: 0;
-    box-sizing: border-box;
+    padding: 0;
 }
 
-body {
-    height: 90%;
-    font: caption;
-    background-color: #F4F7F8;
+.content{
+    margin: 10px ;
+}
 
-    margin-top: 5px;
+#crypto {
+    width: 100%;
+}
+
+.img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.logo {
+    margin-bottom: 10px;
+}
+
+.select-style {
+    border: 1px solid #ccc;
+    overflow: hidden;
+    background: #fafafa no-repeat 90% 50%;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
 }
