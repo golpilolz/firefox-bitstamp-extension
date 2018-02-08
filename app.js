@@ -1,6 +1,6 @@
 // In second
 const REFRESH_TIME = 30;
-const DEFAULT_CURRENCY = 'ethusd';
+const DEFAULT_CURRENCY = 'etheur';
 
 let lastvalue = 0;
 let urlbt = 'https://www.bitstamp.net/api/v2/ticker/';
@@ -18,7 +18,11 @@ function init() {
     browser.browserAction.setBadgeBackgroundColor({color: "grey"});
 
     if (typeof currentCurrency === 'undefined') {
-        currentCurrency = DEFAULT_CURRENCY + "/";
+        currentCurrency = DEFAULT_CURRENCY;
+
+        browser.storage.local.set({
+            bt_currency: DEFAULT_CURRENCY
+        });
     }
 
     refresh();
@@ -28,6 +32,13 @@ function init() {
     intervalRefresh = setInterval(function () {
         refresh();
     }, REFRESH_TIME * 1000);
+}
+
+function initValues(){
+    browser.storage.local.get('bt_currency').then(function (res) {
+        currentCurrency = res.bt_currency;
+        init();
+    });
 }
 
 /**
@@ -62,8 +73,6 @@ function refresh() {
         }
     };
 
-    console.log(urlbt + currentCurrency);
-
     req.open('GET', urlbt + currentCurrency, true);
     req.send(null);
 }
@@ -84,15 +93,8 @@ function saveInStorage(obj) {
  * @param value
  */
 function updateTitle(cryptoName, timestamp, value) {
-    let date = new Date(timestamp * 1000);
-    let hours = date.getHours();
-    let minutes = "0" + date.getMinutes();
-    let seconds = "0" + date.getSeconds();
-
-    let formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-
     browser.browserAction.setTitle({
-        title: 'Ethereum à ' + formattedTime + " : " + value + " €"
+        title: 'Ethereum à ' + formatDate(timestamp) + " : " + value + " €"
     });
 }
 
@@ -117,4 +119,18 @@ function logStorageChange(changes, area) {
     }
 }
 
-init();
+/**
+ *
+ * @param timestamp
+ * @return {string}
+ */
+function formatDate(timestamp) {
+    let date = new Date(timestamp*1000);
+    let hours = date.getHours();
+    let minutes = "0" + date.getMinutes();
+    let seconds = "0" + date.getSeconds();
+
+    return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+}
+
+initValues();

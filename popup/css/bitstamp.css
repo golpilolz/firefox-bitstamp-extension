@@ -12,9 +12,18 @@ html, body {
     width: 100%;
 }
 
+.img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.logo {
+    margin-bottom: 10px;
+}
+
 .select-style {
     border: 1px solid #ccc;
-    border-radius: 3px;
     overflow: hidden;
     background: #fafafa no-repeat 90% 50%;
 }
