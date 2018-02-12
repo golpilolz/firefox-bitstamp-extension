@@ -17,7 +17,7 @@ function initPopup() {
 }
 
 function updateDate(timestamp) {
-    lastupdateBox.innerText = formatDate(timestamp);
+    lastupdateBox.innerText = browser.i18n.getMessage("lastUpdate", formatDate(timestamp));
 }
 
 function updateValue(value) {
@@ -26,7 +26,7 @@ function updateValue(value) {
 
 function updateRefreshTime(time) {
     refreshspeed.value = time;
-    refreshvalue.innerHTML = time;
+    refreshvalue.innerHTML = browser.i18n.getMessage("refreshTimeMessage", time);
 }
 
 function updatePopup() {
