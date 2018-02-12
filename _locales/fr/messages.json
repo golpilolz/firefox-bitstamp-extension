@@ -1,0 +1,22 @@
+{
+  "lastUpdate": {
+    "message": "Dernière mise à jour : $UPDATE$",
+    "description": "",
+    "placeholders": {
+      "update" : {
+        "content" : "$1",
+        "example" : "14:45:51"
+      }
+    }
+  },
+  "refreshTimeMessage": {
+    "message": "Mis à jour toute les $TIME$ secondes",
+    "description": "Tells the user how many seconds between data refreshs",
+    "placeholders": {
+      "time" : {
+        "content" : "$1",
+        "example" : "30"
+      }
+    }
+  }
+}
