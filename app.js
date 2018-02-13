@@ -9,19 +9,14 @@ let refreshTime;
 
 let intervalRefresh;
 
-let cryptos = [];
-cryptos['etheur'] = [];
-cryptos['etheur']['name'] = 'ETH / EUR';
-cryptos['etheur']['icon'] = 'icons/eth-32.png';
-cryptos['xrpeur'] = [];
-cryptos['xrpeur']['name'] = 'XRP / EUR';
-cryptos['xrpeur']['icon'] = 'icons/xrp-32.png';
+let cryptos;
 
 /**
  * Init all value and start interval
  */
 function init() {
     let promises = [];
+    cryptos = getCryptos();
 
     promises.push(browser.storage.local.get('bt_currency').then(function (res) {
         currentCurrency = res.bt_currency;
@@ -76,14 +71,11 @@ function refresh() {
     const req = new XMLHttpRequest();
 
     req.onreadystatechange = function (event) {
-        // XMLHttpRequest.DONE === 4
         if (this.readyState === XMLHttpRequest.DONE) {
             if (this.status === 200) {
                 let obj = JSON.parse(this.responseText);
                 saveInStorage(obj);
-
                 let val = obj.last;
-
                 if (val >= 100) {
                     val = Math.floor(parseFloat(val)) + "";
                 }
@@ -122,14 +114,12 @@ function saveInStorage(obj) {
  */
 function updateTitle(cryptoName, timestamp, value) {
     browser.browserAction.setTitle({
-        title: cryptos[currentCurrency]['name'] + ' at ' + formatDate(timestamp) + " : " + value + " €"
+        title: cryptos[currentCurrency]['name'] + ' at ' + formatTime(timestamp) + " : " + value + " €"
     });
 }
 
 /**
- * Log the storage area that changed,
- * then for each item changed,
- * log its old value and its new value.
+ * Save all changes in storage.
  *
  * @param changes
  * @param area
@@ -159,20 +149,6 @@ function logStorageChange(changes, area) {
             refresh();
         }, refreshTime * 1000);
     }
-}
-
-/**
- *
- * @param timestamp
- * @return {string}
- */
-function formatDate(timestamp) {
-    let date = new Date(timestamp*1000);
-    let hours = date.getHours();
-    let minutes = "0" + date.getMinutes();
-    let seconds = "0" + date.getSeconds();
-
-    return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 }
 
 init();

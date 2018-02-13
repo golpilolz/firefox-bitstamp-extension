@@ -13,6 +13,8 @@
   },
   "background": {
     "scripts": [
+      "src/cryptos.js",
+      "src/functions.js",
       "app.js"
     ]
   },

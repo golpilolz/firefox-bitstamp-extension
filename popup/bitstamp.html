@@ -7,28 +7,29 @@
 </head>
 
 <body>
-    <div class="content">
-        <div class="logo">
-            <img class="img-center" src="../icons/bitstamp-48.png" height="48" width="48"/>
-        </div>
-        <label for="crypto"></label>
-        <div class="select-style">
-            <select id="crypto">
-                <option value="etheur">ETH / EUR</option>
-                <option value="xrpeur">XRP / EUR</option>
-            </select>
-        </div>
-
-        <p>Last update : <span id="lastupdate"></span></p>
-        <p><span id="current-currency-name"></span> : <span id="lastvalue"></span></p>
-
-        <div class="slidecontainer">
-            <label for="refreshspeed"></label>
-            <input id="refreshspeed" class="slider" type="range" min="10" max="60" step="5">
-            <div class="refresh">Every <span id="refreshvalue"></span> seconds</div>
-        </div>
+<div class="content">
+    <div class="logo">
+        <img class="img-center" src="../icons/bitstamp-48.png" height="48" width="48"/>
+    </div>
+    <label for="crypto"></label>
+    <div class="select-style">
+        <select id="crypto">
+            <option value="etheur">ETH / EUR</option>
+            <option value="xrpeur">XRP / EUR</option>
+        </select>
     </div>
 
+    <p>Last update : <span id="lastupdate"></span></p>
+    <p><span id="current-currency-name"></span> : <span id="lastvalue"></span></p>
+
+    <div class="slidecontainer">
+        <label for="refreshspeed"></label>
+        <input id="refreshspeed" class="slider" type="range" min="10" max="60" step="5">
+        <div class="refresh">Every <span id="refreshvalue"></span> seconds</div>
+    </div>
+</div>
+
+<script src="../src/functions.js"></script>
 <script src="js/bitstamp.js"></script>
 </body>
 

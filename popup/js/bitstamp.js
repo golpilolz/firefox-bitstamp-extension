@@ -17,7 +17,7 @@ function initPopup() {
 }
 
 function updateDate(timestamp) {
-    lastupdateBox.innerText = formatDate(timestamp);
+    lastupdateBox.innerText = formatTime(timestamp);
 }
 
 function updateValue(value) {
