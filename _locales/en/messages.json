@@ -1,4 +1,18 @@
 {
+  "badgeMessage": {
+    "message": "$CURRENCY$ at $UPDATE$",
+    "description": "",
+    "placeholders": {
+      "currency" : {
+        "content" : "$1",
+        "example" : "ETH / EUR"
+      },
+      "update" : {
+        "content" : "$2",
+        "example" : "14:45:51"
+      }
+    }
+  },
   "lastUpdate": {
     "message": "Last update : $UPDATE$",
     "description": "",

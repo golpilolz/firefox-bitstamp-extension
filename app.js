@@ -122,7 +122,7 @@ function saveInStorage(obj) {
  */
 function updateTitle(cryptoName, timestamp, value) {
     browser.browserAction.setTitle({
-        title: cryptos[currentCurrency]['name'] + ' at ' + formatDate(timestamp) + " : " + value + " €"
+        title: browser.i18n.getMessage("badgeMessage", [cryptos[currentCurrency]['name'], formatDate(timestamp), value + " €"])
     });
 }
 
