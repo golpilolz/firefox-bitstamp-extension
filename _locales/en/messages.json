@@ -1,0 +1,36 @@
+{
+  "badgeMessage": {
+    "message": "$CURRENCY$ at $UPDATE$",
+    "description": "",
+    "placeholders": {
+      "currency" : {
+        "content" : "$1",
+        "example" : "ETH / EUR"
+      },
+      "update" : {
+        "content" : "$2",
+        "example" : "14:45:51"
+      }
+    }
+  },
+  "lastUpdate": {
+    "message": "Last update : $UPDATE$",
+    "description": "",
+    "placeholders": {
+      "update" : {
+        "content" : "$1",
+        "example" : "14:45:51"
+      }
+    }
+  },
+  "refreshTimeMessage": {
+    "message": "Refresh every $TIME$ seconds",
+    "description": "Tells the user how many seconds between data refreshs",
+    "placeholders": {
+      "time" : {
+        "content" : "$1",
+        "example" : "30"
+      }
+    }
+  }
+}
