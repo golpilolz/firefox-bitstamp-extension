@@ -4,6 +4,11 @@ html, body {
     padding: 0;
 }
 
+canvas {
+    margin-top: 20px;
+    max-width: 100%;
+}
+
 .content{
     margin: 10px ;
 }

@@ -7,6 +7,8 @@ let refreshvalue = document.getElementById("refreshvalue");
 
 let currentCurrencyName = document.getElementById("current-currency-name");
 
+let chart = document.getElementById("chart");
+
 lastupdateBox.innerText = "";
 
 function initPopup() {
@@ -14,6 +16,8 @@ function initPopup() {
         cryptoselect.value = res.bt_currency;
     });
     browser.storage.onChanged.addListener(updatePopup);
+
+    drawChart();
 }
 
 function updateDate(timestamp) {
@@ -45,6 +49,16 @@ function updatePopup() {
     browser.storage.local.get('current_currency_name').then(function(item){
         currentCurrencyName.innerHTML = item.current_currency_name;
     });
+}
+
+function drawChart() {
+    let ctx = chart.getContext("2d");
+    ctx.beginPath();
+    ctx.moveTo(0,50);
+    for(let i = 10;i <= 250; i += 5) {
+        ctx.lineTo(i, Math.floor(Math.random() * Math.floor(50)));
+    }
+    ctx.stroke();
 }
 
 initPopup();
