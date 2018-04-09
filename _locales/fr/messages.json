@@ -28,7 +28,7 @@
     }
   },
   "refreshTimeMessage": {
-    "message": "Mis à jour toute les $TIME$ secondes",
+    "message": "Mis à jour toutes les $TIME$ secondes",
     "description": "Tells the user how many seconds between data refreshs",
     "placeholders": {
       "time" : {
